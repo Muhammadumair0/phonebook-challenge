@@ -1,40 +1,55 @@
 import bcrypt from "bcrypt-nodejs";
 import { NextFunction, Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
-import passport from "passport";
-import "../auth/passportHandler";
-// import { User } from "../models/user";
 import { JWT_SECRET } from "../util/secrets";
+import { BadRequest } from "../exceptions";
+import { knex } from "../db/knex";
 
 export class UserController {
-  public async registerUser(req: Request, res: Response): Promise<void> {
-    const hashedPassword = bcrypt.hashSync(
-      req.body.password,
-      bcrypt.genSaltSync(10)
-    );
-
-    await User.create({
-      username: req.body.username,
-      password: hashedPassword,
+  public async loginUser(req: any, res: Response, next: NextFunction) {
+    req.checkBody({
+      email: {
+        notEmpty: true,
+        errorMessage: "Email is required",
+      },
+      password: {
+        notEmpty: true,
+        errorMessage: "Password is required",
+      },
     });
 
-    const token = jwt.sign(
-      { username: req.body.username, scope: req.body.scope },
-      JWT_SECRET
-    );
-    res.status(200).send({ token: token });
-  }
+    const validateResults: any = await req.getValidationResult().catch(next);
 
-  public authenticateUser(req: Request, res: Response, next: NextFunction) {
-    passport.authenticate("local", function (err, user, info) {
-      // no async/await because passport works only with callback ..
-      if (err) return next(err);
-      if (!user) {
-        return res.status(401).json({ status: "error", code: "unauthorized" });
-      } else {
-        const token = jwt.sign({ username: user.username }, JWT_SECRET);
-        res.status(200).send({ token: token });
-      }
+    if (validateResults.array().length > 0) {
+      return next(new BadRequest(validateResults.array()[0].msg));
+    }
+
+    const { email, password } = req.body;
+
+    const [loggedIn] = await knex("users").where({
+      email,
+      password,
+    });
+
+    if (!loggedIn) {
+      return next(new BadRequest("Wrong email or password"));
+    }
+
+    const token = jwt.sign(
+      {
+        id: loggedIn.id,
+        email: loggedIn.email,
+      },
+      JWT_SECRET as string,
+      { expiresIn: 60 * 2880 } // expire in 2 days
+    );
+
+    res.send({
+      user: {
+        id: loggedIn.id,
+        email: loggedIn.email,
+      },
+      accessToken: token,
     });
   }
 }
