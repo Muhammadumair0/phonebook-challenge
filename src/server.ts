@@ -24,8 +24,8 @@ class Server {
   public config(): void {
     this.app.set("port", process.env.PORT || 3000);
     this.app.use(express.json());
-    this.app.use(expressValidator());
     this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(expressValidator());
     this.app.use(compression());
     this.app.use(cors());
   }

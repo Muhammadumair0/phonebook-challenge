@@ -16,6 +16,7 @@
     "@types/compression": "0.0.36",
     "@types/cors": "^2.8.4",
     "@types/express": "^4.16.1",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^11.9.4",
     "@types/uuid": "^3.4.4",
     "bcrypt-nodejs": "0.0.3",
@@ -26,11 +27,12 @@
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
     "http-status-codes": "^2.1.4",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.15",
     "nodemon": "^1.18.10",
     "pg": "^8.5.1",
     "typescript": "^3.3.3",
-    "uuid": "^3.3.2"
+    "uuid": "^3.4.0"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

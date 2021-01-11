@@ -2,7 +2,7 @@ import bcrypt from "bcrypt-nodejs";
 import { NextFunction, Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../util/secrets";
-import { BadRequest } from "../exceptions";
+import { BadRequest } from "../responseHandlers";
 import { knex } from "../db/knex";
 
 export class UserController {

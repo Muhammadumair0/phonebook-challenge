@@ -4,7 +4,7 @@ import { JWT_SECRET } from "../util/secrets";
 import {
   BadRequest,
   UnauthorizedError,
-} from "../exceptions";
+} from "../responseHandlers";
 
 export class AuthController {
   public async authorizeJWT(req: Request, res: Response, next: NextFunction) {
@@ -12,7 +12,7 @@ export class AuthController {
       req.checkHeaders({
         authorization: {
           notEmpty: true,
-          errorMessage: "Auth token is required",
+          errorMessage: "Authorization token is required",
         },
       });
 
@@ -27,7 +27,7 @@ export class AuthController {
       const existingUser = jwt.verify(authorization, JWT_SECRET);
 
       if (!existingUser) {
-        return next(new UnauthorizedError("Wrong Auth token"));
+        return next(new UnauthorizedError("Wrong Authorization token"));
       }
 
       next();

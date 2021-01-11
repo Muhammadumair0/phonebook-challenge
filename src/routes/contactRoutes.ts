@@ -12,6 +12,8 @@ export class ContactRoutes {
     this.routes();
   }
   routes() {
-    this.router.post("/all", this.authController.authorizeJWT,this.contactController.getAllContacts);
+    this.router.get("/all", this.authController.authorizeJWT,this.contactController.getAllContacts);
+    this.router.post("/create", this.authController.authorizeJWT,this.contactController.createContact);
+    this.router.put("/update", this.authController.authorizeJWT,this.contactController.getAllContacts);
   }
 }
