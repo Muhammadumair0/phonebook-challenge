@@ -59,7 +59,7 @@ export class ContactController {
         return next(new BadRequest(validateResults.array()[0].msg));
       }
 
-      const contactId = await knex("contact")
+      const [contactId] = await knex("contacts")
         .returning("id")
         .insert({
           id: uuidv4(),
@@ -70,6 +70,62 @@ export class ContactController {
         id: contactId,
         message: "Contact successfully created!",
       });
+    } catch (e) {
+      res.send(new BadRequest(e));
+    }
+  }
+
+  public async updateContact(req: Request, res: Response, next: NextFunction) {
+    try {
+      req.checkParams({
+        id: {
+          notEmpty: true,
+          errorMessage: "Contact ID is required",
+        },
+      });
+
+      const validateResults: any = await req.getValidationResult().catch(next);
+
+      if (validateResults.array().length > 0) {
+        return next(new BadRequest(validateResults.array()[0].msg));
+      }
+
+      const { id } = req.params;
+
+      const [updatedContact] = await knex("contacts")
+        .where({ id })
+        .update(req.body)
+        .returning("*");
+
+      res.send(updatedContact);
+    } catch (e) {
+      res.send(new BadRequest(e));
+    }
+  }
+
+  public async deleteContact(req: Request, res: Response, next: NextFunction) {
+    try {
+      req.checkParams({
+        id: {
+          notEmpty: true,
+          errorMessage: "Contact ID is required",
+        },
+      });
+
+      const validateResults: any = await req.getValidationResult().catch(next);
+
+      if (validateResults.array().length > 0) {
+        return next(new BadRequest(validateResults.array()[0].msg));
+      }
+
+      const { id } = req.params;
+
+      const [deletedId] = await knex("contacts")
+        .where({ id })
+        .delete()
+        .returning("id");
+
+      res.send(deletedId);
     } catch (e) {
       res.send(new BadRequest(e));
     }

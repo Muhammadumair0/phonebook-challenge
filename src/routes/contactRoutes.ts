@@ -12,8 +12,25 @@ export class ContactRoutes {
     this.routes();
   }
   routes() {
-    this.router.get("/all", this.authController.authorizeJWT,this.contactController.getAllContacts);
-    this.router.post("/create", this.authController.authorizeJWT,this.contactController.createContact);
-    this.router.put("/update", this.authController.authorizeJWT,this.contactController.getAllContacts);
+    this.router.get(
+      "/all",
+      this.authController.authorizeJWT,
+      this.contactController.getAllContacts
+    );
+    this.router.post(
+      "/create",
+      this.authController.authorizeJWT,
+      this.contactController.createContact
+    );
+    this.router.put(
+      "/update/:id",
+      this.authController.authorizeJWT,
+      this.contactController.updateContact
+    );
+    this.router.delete(
+      "/delete/:id",
+      this.authController.authorizeJWT,
+      this.contactController.deleteContact
+    );
   }
 }
