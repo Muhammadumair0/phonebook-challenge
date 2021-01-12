@@ -2,8 +2,9 @@
   "name": "chalkboard-phonebook-challenge",
   "version": "0.1.0",
   "engines": {
-    "node": "12.8.0"
+    "node": ">=10.15.0 <13.0.0"
   },
+  "engineStrict" : true,
   "scripts": {
     "start": "npm run serve",
     "build": "npm run build-ts && npm run tslint",
