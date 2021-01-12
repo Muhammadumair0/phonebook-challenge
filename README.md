@@ -62,7 +62,7 @@ To get **access token** for a user, you have to Login by the verified account wh
 ## Contact APIs
 Put the **access token** in the request headers as **Authorization**, then use the following APIs to get required results.
 
-###Contact List
+### Contact List
 It will list out all the contacts as per request params.
 
 `GET https://chalkboard-phonebook-challenge.herokuapp.com/api/contact/all?sortField=creation_stamp&sortOrder=desc&offset=0&limit=20`
@@ -81,7 +81,8 @@ It will list out all the contacts as per request params.
 | `offset` | any number required for pagination | 0 |
 | `limit`      | any number required for pagination | 50 | |
 
-####Response
+#### Response
+
 	{
     "status": 200,
     "name": "Success",
@@ -114,7 +115,8 @@ To create a contact, its mandontary to add **name, email, work_phone, home_phone
 | `Authorization`      | **accessToken** |
 | `Content-Type`      | **application/json** |
 
-####Request
+#### Request
+
 	{
     "name": "Rowan Lloyd",
     "email": "phizntrg@verizon.net",
@@ -124,7 +126,8 @@ To create a contact, its mandontary to add **name, email, work_phone, home_phone
     "mailing_address": "East 143 Railway Street ARMAGH BT61 7HT"
 	}
 
-####Response
+#### Response
+
 	{
     "status": 200,
     "name": "Success",
@@ -137,7 +140,7 @@ To create a contact, its mandontary to add **name, email, work_phone, home_phone
 ------------
 
 
-###Update Contact
+### Update Contact
 You may update any field of a contact, just pass in the field name you want to update.
 
 `PUT https://chalkboard-phonebook-challenge.herokuapp.com/api/contact/update/:id`
@@ -151,38 +154,39 @@ You may update any field of a contact, just pass in the field name you want to u
 |:--------------|:----------------------------------|
 | `:id`      | Contact id of the user | |
 
-####Request
+#### Request
 
-	{
-    "name": "Allison Travis"
-	}
+        {
+        "name": "Allison Travis"
+        }
 > In this case it is only updating the contact name.
 
-####Response
-	{
-    "status": 200,
-    "name": "Success",
-    "message": "contact updated successfully",
-    "data": {
-        "id": {
-            "id": "bc9213f8-a1f0-47fe-96c7-13e7031c5537",
-            "name": "Allison Travis",
-            "work_phone": "612-393-0029",
-            "home_phone": "612-321-0047",
-            "other_phone": "912-927-1215",
-            "email": "AEA@anet.com",
-            "mailing_address": "Cecilia Chapman 711-2880 Nulla St.Mankato Mississippi 96522",
-            "creation_stamp": "2021-01-12T03:50:59.083Z",
-            "modification_stamp": null
+#### Response
+
+        {
+        "status": 200,
+        "name": "Success",
+        "message": "contact updated successfully",
+        "data": {
+            "id": {
+                "id": "bc9213f8-a1f0-47fe-96c7-13e7031c5537",
+                "name": "Allison Travis",
+                "work_phone": "612-393-0029",
+                "home_phone": "612-321-0047",
+                "other_phone": "912-927-1215",
+                "email": "AEA@anet.com",
+                "mailing_address": "Cecilia Chapman 711-2880 Nulla St.Mankato Mississippi 96522",
+                "creation_stamp": "2021-01-12T03:50:59.083Z",
+                "modification_stamp": null
+            }
         }
-   	 }
-	}
+        }
 > It will return the contact which is effected by the update.
 
 ------------
 
 
-###Delete Contact
+### Delete Contact
 To delete a contact just pass in the contact id to be deleted
 
 `DELETE https://chalkboard-phonebook-challenge.herokuapp.com/api/contact/delete/:id`
@@ -195,15 +199,15 @@ To delete a contact just pass in the contact id to be deleted
 |:--------------|:----------------------------------|
 | `:id`      | Contact id of the user | |
 
-####Response
-	{
-    "status": 200,
-    "name": "Success",
-    "message": "contact deleted successfully",
-    "data": {
-        "id": "bc9213f8-a1f0-47fe-96c7-13e7031c5537"
-     	}
-	}
+#### Response
+        {
+        "status": 200,
+        "name": "Success",
+        "message": "contact deleted successfully",
+        "data": {
+            "id": "bc9213f8-a1f0-47fe-96c7-13e7031c5537"
+            }
+        }
 
 ------------
 
