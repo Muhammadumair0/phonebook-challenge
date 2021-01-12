@@ -91,7 +91,7 @@ export class ContactController {
 
       const [updatedContactId] = await knex("contacts")
         .where({ id })
-        .update(req.body)
+        .update({ modification_stamp: "now()", ...req.body })
         .returning("*");
 
       res.send(

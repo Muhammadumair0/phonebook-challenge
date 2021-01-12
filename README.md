@@ -25,7 +25,7 @@ npm start
 ## Database
 PostgreSQL is used as the application database which is **hosted on herouku**, the credentials to access the DB are in the **.env file** (located at the root of application)
 
-## Json web token (JWT)
+## Json web token (JWT) - Login
 
 To get the **access token** for a user, you have to Login by the verified account which is **already created** for you (see the request payload below). 
 
