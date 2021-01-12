@@ -60,7 +60,7 @@ To get **access token** for a user, you have to Login by the verified account wh
 
 
 ## Contact APIs
-Put the **access token** in the request headers as **Authorization**, then use the following APIs to get required results.
+Put the **access token** in the request headers as **Authorization**, then use the following APIs to get the required results.
 
 ### Contact List
 It will list out all the contacts as per request params.
@@ -75,14 +75,13 @@ It will list out all the contacts as per request params.
 > If the params are not provided in the URL then the default param values will be considered.
 
 | Request Params      | Options                       | Defaults |
-|:--------------|:----------------------------------|
+|:--------------|:----------------------------------|:----------------------------------|
 | `sortField`      | name, work_phone, home_phone, other_phone, creation_stamp, modification_stamp | creation_stamp |
 | `sortOrder`    | asc, desc | desc |
 | `offset` | any number required for pagination | 0 |
 | `limit`      | any number required for pagination | 50 | |
 
 #### Response
-
 	{
     "status": 200,
     "name": "Success",
@@ -105,7 +104,7 @@ It will list out all the contacts as per request params.
 ------------
 
 
-###Create Contact
+### Create Contact
 To create a contact, its mandontary to add **name, email, work_phone, home_phone and mailing_address**.
 
 `POST https://chalkboard-phonebook-challenge.herokuapp.com/api/contact/create`
@@ -116,7 +115,6 @@ To create a contact, its mandontary to add **name, email, work_phone, home_phone
 | `Content-Type`      | **application/json** |
 
 #### Request
-
 	{
     "name": "Rowan Lloyd",
     "email": "phizntrg@verizon.net",
@@ -127,7 +125,6 @@ To create a contact, its mandontary to add **name, email, work_phone, home_phone
 	}
 
 #### Response
-
 	{
     "status": 200,
     "name": "Success",
@@ -156,31 +153,30 @@ You may update any field of a contact, just pass in the field name you want to u
 
 #### Request
 
-        {
-        "name": "Allison Travis"
-        }
+	{
+    "name": "Allison Travis"
+	}
 > In this case it is only updating the contact name.
 
 #### Response
-
-        {
-        "status": 200,
-        "name": "Success",
-        "message": "contact updated successfully",
-        "data": {
-            "id": {
-                "id": "bc9213f8-a1f0-47fe-96c7-13e7031c5537",
-                "name": "Allison Travis",
-                "work_phone": "612-393-0029",
-                "home_phone": "612-321-0047",
-                "other_phone": "912-927-1215",
-                "email": "AEA@anet.com",
-                "mailing_address": "Cecilia Chapman 711-2880 Nulla St.Mankato Mississippi 96522",
-                "creation_stamp": "2021-01-12T03:50:59.083Z",
-                "modification_stamp": null
-            }
+	{
+    "status": 200,
+    "name": "Success",
+    "message": "contact updated successfully",
+    "data": {
+        "id": {
+            "id": "bc9213f8-a1f0-47fe-96c7-13e7031c5537",
+            "name": "Allison Travis",
+            "work_phone": "612-393-0029",
+            "home_phone": "612-321-0047",
+            "other_phone": "912-927-1215",
+            "email": "AEA@anet.com",
+            "mailing_address": "Cecilia Chapman 711-2880 Nulla St.Mankato Mississippi 96522",
+            "creation_stamp": "2021-01-12T03:50:59.083Z",
+            "modification_stamp": null
         }
-        }
+   	 }
+	}
 > It will return the contact which is effected by the update.
 
 ------------
@@ -200,20 +196,20 @@ To delete a contact just pass in the contact id to be deleted
 | `:id`      | Contact id of the user | |
 
 #### Response
-        {
-        "status": 200,
-        "name": "Success",
-        "message": "contact deleted successfully",
-        "data": {
-            "id": "bc9213f8-a1f0-47fe-96c7-13e7031c5537"
-            }
-        }
+	{
+    "status": 200,
+    "name": "Success",
+    "message": "contact deleted successfully",
+    "data": {
+        "id": "bc9213f8-a1f0-47fe-96c7-13e7031c5537"
+     	}
+	}
 
 ------------
 
 
 ## Express Validator
-[express validator ](https://express-validator.github.io/docs/) is used to validate the request data. It is a very useful library that help you validate the request data.
+We use the [express validator ](https://express-validator.github.io/docs/) to validate the request data. It is a very useful library that help you validate the request data.
 Initializing express validator in server.ts file:
 ```sh
 this.app.use(expressValidator());
