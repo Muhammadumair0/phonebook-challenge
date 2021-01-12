@@ -35,7 +35,7 @@ export class UserController {
         return next(new BadRequest("Wrong email or password"));
       }
 
-      const token = jwt.sign(
+      const token: string = jwt.sign(
         {
           id: loggedIn.id,
           email: loggedIn.email,

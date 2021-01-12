@@ -3,7 +3,6 @@ import { knex } from "../db/knex";
 import { BadRequest } from "../responseHandlers";
 import { v4 as uuidv4 } from "uuid";
 import { Success } from "../responseHandlers/Success";
-
 export class ContactController {
   public async getAllContacts(req: Request, res: Response, next: NextFunction) {
     try {

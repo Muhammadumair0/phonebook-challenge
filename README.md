@@ -209,7 +209,7 @@ To delete a contact just pass in the contact id to be deleted
 
 
 ## Express Validator
-We use the [express validator ](https://express-validator.github.io/docs/) to validate the request data. It is a very useful library that help you validate the request data.
+[express validator ](https://express-validator.github.io/docs/) is used to validate the request data. It is a very useful library that help you validate the request data.
 Initializing express validator in server.ts file:
 ```sh
 this.app.use(expressValidator());
