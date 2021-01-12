@@ -27,7 +27,7 @@ PostgreSQL is used as the application database which is **hosted on herouku**, t
 
 ## Json web token (JWT) - Login
 
-To get the **access token** for a user, you have to Login by the verified account which is **already created** for you (see the request payload below). 
+To get the **access token** for a user, you have to Login by the account which is **already created** for you (see the request payload below). 
 
 `POST https://chalkboard-phonebook-challenge.herokuapp.com/api/user/login`
 
