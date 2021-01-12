@@ -6,3 +6,4 @@ export { UnauthorizedError } from "./UnauthorizedError";
 export { UnprocessableEntity } from "./UnprocessableEntity";
 export { Forbidden } from "./Forbidden";
 export { EventException } from "./EventException";
+export { Success } from "./Success";

@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { knex } from "../db/knex";
 import { BadRequest } from "../responseHandlers";
 import { v4 as uuidv4 } from "uuid";
+import { Success } from "../responseHandlers/Success";
 
 export class ContactController {
   public async getAllContacts(req: Request, res: Response, next: NextFunction) {
@@ -18,7 +19,7 @@ export class ContactController {
         .offset(offset)
         .limit(limit);
 
-      res.send(contacts);
+      res.send(new Success("contacts retrieved successfully", contacts));
     } catch (e) {
       res.send(new BadRequest(e));
     }
@@ -66,10 +67,7 @@ export class ContactController {
           ...req.body,
         });
 
-      res.send({
-        id: contactId,
-        message: "Contact successfully created!",
-      });
+      res.send(new Success("contact created successfully", { id: contactId }));
     } catch (e) {
       res.send(new BadRequest(e));
     }
@@ -92,12 +90,14 @@ export class ContactController {
 
       const { id } = req.params;
 
-      const [updatedContact] = await knex("contacts")
+      const [updatedContactId] = await knex("contacts")
         .where({ id })
         .update(req.body)
         .returning("*");
 
-      res.send(updatedContact);
+      res.send(
+        new Success("contact updated successfully", { id: updatedContactId })
+      );
     } catch (e) {
       res.send(new BadRequest(e));
     }
@@ -125,7 +125,7 @@ export class ContactController {
         .delete()
         .returning("id");
 
-      res.send(deletedId);
+      res.send(new Success("contact deleted successfully", { id: deletedId }));
     } catch (e) {
       res.send(new BadRequest(e));
     }
